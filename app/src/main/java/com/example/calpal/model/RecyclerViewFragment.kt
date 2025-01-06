@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
+/*
 class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
     private lateinit var binding: FragmentRecyclerViewBinding
@@ -26,12 +27,30 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
     private lateinit var dbRef: DatabaseReference
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_recycler_view, container, false)
-    }
+
+override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+): View? {
+    // Inflate the layout for this fragment
+    val view = inflater.inflate(R.layout.fragment_recycler_view, container, false)
+
+    // Initialize the RecyclerView and MealAdapter
+    mealList = arrayListOf()
+    val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+    recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    mealAdapter = MealAdapter(object : MealAdapter.onItemClickListener {
+        override fun onItemClick(position: Int) {
+            // Handle item clicks
+        }
+    })
+    recyclerView.adapter = mealAdapter
+
+    // Fetch meals from Firebase
+    getMeals()
+
+    return view
+}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -85,6 +104,8 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
                         val friendData = Meal(image, name)
                         mealList.add(friendData)
                     }
+                    mealAdapter.submitList(mealList) // Explicitly convert to ArrayList<Meal>
+
                 }
             }
 
@@ -96,4 +117,33 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
 
 
+}*/
+
+class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var mealAdapter: MealAdapter
+    private lateinit var mealList: List<String>
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Define the list of meals
+        mealList = listOf("Breakfast", "Lunch", "Dinner", "Snack")
+
+        mealAdapter = MealAdapter(mealList, object : MealAdapter.onItemClickListener {
+            override fun onItemClick(position: Int) {
+                val selectedMeal = mealList[position]
+                val bundle = Bundle()
+                bundle.putString("selectedMeal", selectedMeal)
+                view.findNavController().navigate(R.id.action_recyclerViewFragment_to_addFoodFragment, bundle)
+            }
+        })
+
+        recyclerView.adapter = mealAdapter
+    }
 }
+

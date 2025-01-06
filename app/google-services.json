@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "861803103268",
+    "project_id": "calpal-cs394",
+    "storage_bucket": "calpal-cs394.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861803103268:android:0982595eee9fcb4c2884b1",
+        "android_client_info": {
+          "package_name": "com.example.calpal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-7OwjmBl6miE4oByIaQynx1I7kmv24mU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
