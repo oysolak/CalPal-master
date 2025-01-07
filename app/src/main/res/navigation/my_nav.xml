@@ -1,50 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/my_nav"
-    app:startDestination="@id/mealFragment">
+    app:startDestination="@id/recyclerViewFragment">
 
-    <fragment
-        android:id="@+id/mealFragment"
-        android:name="com.example.calpal.model.MealFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/meal">
-        <action
-            android:id="@+id/action_mealFragment_to_recyclerViewFragment"
-            app:destination="@id/recyclerViewFragment" />
-    </fragment>
     <fragment
         android:id="@+id/recyclerViewFragment"
         android:name="com.example.calpal.model.RecyclerViewFragment"
-        android:label="fragment_recycler_view"
-        tools:layout="@layout/fragment_recycler_view" >
+        android:label="RecyclerViewFragment"
+        tools:layout="@layout/fragment_recycler_view">
         <action
             android:id="@+id/action_recyclerViewFragment_to_addFoodFragment"
             app:destination="@id/addFoodFragment" />
         <action
             android:id="@+id/action_recyclerViewFragment_to_mealFragment"
             app:destination="@id/mealFragment" />
-        <action
-            android:id="@+id/action_recyclerViewFragment_to_meal"
-            app:destination="@id/meal" />
+
     </fragment>
-    <fragment
-        android:id="@+id/meal"
-        android:name="com.example.calpal.model.MealFragment"
-        android:label="fragment_friend"
-        tools:layout="@layout/fragment_meal" >
-        <action
-            android:id="@+id/action_mealFragment_to_recyclerViewFragment"
-            app:destination="@id/recyclerViewFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/addFoodFragment"
         android:name="com.example.calpal.model.AddFoodFragment"
-        android:label="fragment_add_friend"
+        android:label="Add Food"
         tools:layout="@layout/fragment_add_food" >
         <action
             android:id="@+id/action_addFoodFragment_to_recyclerViewFragment"
             app:destination="@id/recyclerViewFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/mealFragment"
+        android:name="com.example.calpal.model.MealFragment"
+        android:label="MealFragment"
+        tools:layout="@layout/fragment_meal" />
 </navigation>
