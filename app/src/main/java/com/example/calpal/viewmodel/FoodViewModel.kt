@@ -1,20 +1,31 @@
 package com.example.calpal.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.calpal.model.Food
-import com.example.calpal.model.Meal
 
 class FoodViewModel : ViewModel() {
-    val foodsList: MutableLiveData<MutableList<Food>> = MutableLiveData(mutableListOf())
+    private var _foodName = MutableLiveData<String>();
+    private var _foodCalorie = MutableLiveData<Int>();
 
-    fun addFood(food : Food){
-        val currentList = foodsList.value ?: mutableListOf()
-        currentList.add(food)
-        foodsList.value = currentList
+    fun setFoodName(newFoodName: String){
+        _foodName.value = newFoodName;
     }
 
-    fun getFoods() : MutableLiveData<MutableList<Food>> {
-        return foodsList
+    fun setFoodCalorie(newFoodCalorie: Int){
+        _foodCalorie.value = newFoodCalorie;
     }
+
+    val foodName : LiveData<String>
+        get() = _foodName;
+
+    val foodCalorie : LiveData<Int>
+        get() = _foodCalorie;
+
+
+
+
+
+
+
 }
