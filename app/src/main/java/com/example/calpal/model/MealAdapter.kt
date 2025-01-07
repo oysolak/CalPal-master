@@ -13,7 +13,7 @@ import com.google.android.material.imageview.ShapeableImageView
 class MealAdapter(
         private val mealList: List<String>,
         private val mListener: onItemClickListener
-    ) : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
+    ) : ListAdapter<Meal, MealAdapter.MealViewHolder>(MealDiffCallback()) {
 
 
     interface onItemClickListener{
@@ -50,7 +50,7 @@ class MealAdapter(
         return mealList.size
     }
 
-/*    class MealDiffCallback : DiffUtil.ItemCallback<Meal>() {
+   class MealDiffCallback : DiffUtil.ItemCallback<Meal>() {
         override fun areItemsTheSame(oldItem: Meal, newItem: Meal): Boolean {
             return oldItem.mealName == newItem.mealName // Assuming name is unique
         }
@@ -58,5 +58,5 @@ class MealAdapter(
         override fun areContentsTheSame(oldItem: Meal, newItem: Meal): Boolean {
             return oldItem == newItem
         }
-    }*/
+    }
 }
