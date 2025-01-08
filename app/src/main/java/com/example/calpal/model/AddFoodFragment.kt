@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calpal.R
 import com.example.calpal.databinding.FragmentAddFoodBinding
+import com.example.calpal.model.FoodAdapter.OnItemClickListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -18,10 +19,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
+class AddFoodFragment : Fragment(R.layout.fragment_add_food), OnItemClickListener {
 
     private lateinit var binding: FragmentAddFoodBinding
     private lateinit var dbRef: DatabaseReference
+    private var selectedFood: Food? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +39,7 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         binding = FragmentAddFoodBinding.bind(view)
         dbRef = FirebaseDatabase.getInstance().getReference("Foods")
 
-        val foodAdapter = FoodAdapter()
+        val foodAdapter = FoodAdapter(this)
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -101,6 +103,11 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         }.addOnFailureListener {
             Toast.makeText(requireContext(), "Error checking food name. Try again.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onItemClick(food: Food) {
+        selectedFood = food
+        Toast.makeText(requireContext(), "Locked: ${food.foodName}", Toast.LENGTH_SHORT).show()
     }
 }
 

@@ -1,13 +1,17 @@
 package com.example.calpal.model
 
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calpal.R
+import com.google.android.material.card.MaterialCardView
 
 /*
 class FoodAdapter (
@@ -45,15 +49,35 @@ class FoodAdapter (
     }
 }*/
 
-class FoodAdapter : ListAdapter<Food, FoodAdapter.FoodViewHolder>(DiffCallback()) {
+class FoodAdapter(private val listener: OnItemClickListener) : ListAdapter<Food, FoodAdapter.FoodViewHolder>(DiffCallback()) {
+
+    private var selectedPosition: Int = RecyclerView.NO_POSITION
 
     inner class FoodViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val foodNameText: TextView = view.findViewById(R.id.foodItemName)
         private val foodCalorieText: TextView = view.findViewById(R.id.foodItemCalorie)
+        private val cardView: MaterialCardView = view.findViewById(R.id.foodCardView)
 
-        fun bind(food: Food) {
+        @RequiresApi(Build.VERSION_CODES.M)
+        fun bind(food: Food, isSelected: Boolean) {
             foodNameText.text = food.foodName
             foodCalorieText.text = "${food.foodCalorie} kcal"
+
+            cardView.setCardBackgroundColor(
+                if (isSelected) {
+                    view.context.getColor(R.color.purple_200)
+                } else {
+                    view.context.getColor(R.color.white)
+                }
+            )
+
+            cardView.setOnClickListener {
+                val previousPosition = selectedPosition
+                selectedPosition = adapterPosition
+                notifyItemChanged(previousPosition)
+                notifyItemChanged(selectedPosition)
+                listener.onItemClick(food)
+            }
         }
     }
 
@@ -62,13 +86,18 @@ class FoodAdapter : ListAdapter<Food, FoodAdapter.FoodViewHolder>(DiffCallback()
         return FoodViewHolder(view)
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), position == selectedPosition)
     }
 
     class DiffCallback : DiffUtil.ItemCallback<Food>() {
         override fun areItemsTheSame(oldItem: Food, newItem: Food): Boolean = oldItem.foodName == newItem.foodName
         override fun areContentsTheSame(oldItem: Food, newItem: Food): Boolean = oldItem == newItem
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(food: Food)
     }
 }
 

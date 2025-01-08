@@ -2,18 +2,35 @@ package com.example.calpal.model
 
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calpal.R
+import com.example.calpal.databinding.FragmentMealBinding
+import com.example.calpal.databinding.FragmentRecyclerViewBinding
+import com.example.calpal.viewmodel.FoodViewModel
 
 class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
 
+    private val foodViewModel: FoodViewModel by activityViewModels()
+    private lateinit var binding: FragmentRecyclerViewBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var mealAdapter: MealAdapter
     private lateinit var mealList: List<String>
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentRecyclerViewBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +73,11 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, addFoodFragment)
                 .addToBackStack(null)
-                .commit()        }
+                .commit()
+        }
+        foodViewModel.selectedCalories.observe(viewLifecycleOwner) { calories ->
+            binding.currentCalorieDisplay.text = "$calories kcal"
+        }
     }
 }
 
