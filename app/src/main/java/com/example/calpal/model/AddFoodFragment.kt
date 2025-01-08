@@ -8,12 +8,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calpal.R
 import com.example.calpal.databinding.FragmentAddFoodBinding
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
-data class Food(val foodName : String, val foodCalorie : Int)
 
 class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
 
@@ -34,6 +37,28 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
         binding = FragmentAddFoodBinding.bind(view)
         dbRef = FirebaseDatabase.getInstance().getReference("Foods")
 
+        val foodAdapter = FoodAdapter()
+
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = foodAdapter
+        }
+
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val foodList = mutableListOf<Food>()
+                for (data in snapshot.children) {
+                    val food = data.getValue(Food::class.java)
+                    food?.let { foodList.add(it) }
+                }
+                foodAdapter.submitList(foodList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(requireContext(), "Failed to load data", Toast.LENGTH_SHORT).show()
+            }
+        })
+
         binding.addFoodToDbButton.setOnClickListener {
             if (validate()) {
                 saveFoodData()
@@ -42,6 +67,7 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food) {
             }
         }
     }
+
 
     private fun validate(): Boolean {
         return binding.enterFoodName.text.isNotEmpty() && binding.enterFoodCalorie.text.isNotEmpty()

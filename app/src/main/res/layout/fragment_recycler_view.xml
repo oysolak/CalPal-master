@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,65 +9,107 @@
     android:background="#D8BFE9"
     android:backgroundTint="#B7C3B2">
 
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="411dp"
-        android:layout_height="550dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toTopOf="@+id/currentCalorieTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <Button
         android:id="@+id/addFoodButton"
         android:layout_width="204dp"
         android:layout_height="49dp"
         android:layout_margin="16dp"
-        android:layout_marginStart="191dp"
-        android:layout_marginEnd="104dp"
+        android:layout_marginStart="84dp"
         android:layout_marginBottom="24dp"
-        android:text="Add Food"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="food list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enterTargetCalorie"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/enterTargetCalorie"
+        android:layout_width="170dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="16dp"
+        android:hint="Enter Target Calorie"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/targetCalorieTextView" />
+
+    <Button
+        android:id="@+id/setTargetCalorieButton"
+        android:layout_width="60dp"
+        android:layout_height="48dp"
+        android:layout_margin="16dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:text="Set"
+        app:layout_constraintStart_toEndOf="@+id/enterTargetCalorie"
         app:layout_constraintTop_toBottomOf="@+id/targetCalorieTextView" />
 
     <TextView
         android:id="@+id/currentCalorieTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="146dp"
-        android:layout_marginBottom="200dp"
-        android:text="Current Calorie: 0"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="8dp"
+        android:text="Current Calorie"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/addFoodButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.565"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        app:layout_constraintVertical_bias="0.321" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+    <TextView
+        android:id="@+id/currentCalorieDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/currentCalorieTextView"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <TextView
         android:id="@+id/targetCalorieTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="146dp"
-        android:text="Target Calorie: 0"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="8dp"
+        android:text="Target Calorie"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentCalorieTextView" />
+
+    <TextView
+        android:id="@+id/targetCalorieDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="8dp"
+        android:text="0"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/targetCalorieTextView"
+        app:layout_constraintTop_toBottomOf="@+id/currentCalorieDisplay" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
