@@ -107,7 +107,6 @@ class AddFoodFragment : Fragment(R.layout.fragment_add_food), OnItemClickListene
 
     override fun onItemClick(food: Food) {
         selectedFood = food
-        Toast.makeText(requireContext(), "Locked: ${food.foodName}", Toast.LENGTH_SHORT).show()
     }
 }
 

@@ -41,21 +41,6 @@ class MealFragment : Fragment(R.layout.fragment_meal), OnItemClickListener {
         return binding.root
     }
 
-/*    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.viewmodel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        val bundle = arguments
-        if (bundle != null) {
-            val mealName = bundle.getString("mealName")
-            val mealImageResId = bundle.getInt("mealImage")
-
-            binding.mealName.text = mealName
-            binding.mealImage.setImageResource(mealImageResId)
-        }
-    }*/
 override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 
@@ -99,15 +84,18 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         })
 
         binding.selectFood.setOnClickListener {
-            selectedFood?.let {
-                foodViewModel.selectedCalories.value = it.foodCalorie
-                Toast.makeText(requireContext(), "Calories set to ${it.foodCalorie}", Toast.LENGTH_SHORT).show()
+            selectedFood?.let { food ->
+                val mealName = arguments?.getString("mealName")
+                if (mealName != null) {
+                    foodViewModel.addCaloriesToMeal(mealName, food.foodCalorie)
+                    Toast.makeText(requireContext(), "Added ${food.foodCalorie} kcal to $mealName", Toast.LENGTH_SHORT).show()
+                }
             } ?: Toast.makeText(requireContext(), "No food selected!", Toast.LENGTH_SHORT).show()
         }
+
     }
 
         override fun onItemClick(food: Food) {
         selectedFood = food
-        Toast.makeText(requireContext(), "Selected: ${food.foodName}", Toast.LENGTH_SHORT).show()
     }
 }
