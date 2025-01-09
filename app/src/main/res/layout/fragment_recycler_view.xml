@@ -16,7 +16,6 @@
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/currentCalorieTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,86 +29,23 @@
         android:layout_height="49dp"
         android:layout_margin="16dp"
         android:layout_marginStart="84dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginTop="32dp"
         android:text="food list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterTargetCalorie"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/enterTargetCalorie"
-        android:layout_width="170dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="16dp"
-        android:hint="Enter Target Calorie"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetCalorieTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
     <Button
-        android:id="@+id/setTargetCalorieButton"
-        android:layout_width="60dp"
-        android:layout_height="48dp"
+        android:id="@+id/statisticsButton"
+        android:layout_width="204dp"
+        android:layout_height="49dp"
         android:layout_margin="16dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:text="Set"
-        app:layout_constraintStart_toEndOf="@+id/enterTargetCalorie"
-        app:layout_constraintTop_toBottomOf="@+id/targetCalorieTextView" />
-
-    <TextView
-        android:id="@+id/currentCalorieTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="8dp"
-        android:text="Current Calorie"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="32dp"
+        android:text="STATISTICS"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-    <TextView
-        android:id="@+id/currentCalorieDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="8dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/currentCalorieTextView"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
-
-    <TextView
-        android:id="@+id/targetCalorieTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="8dp"
-        android:text="Target Calorie"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/currentCalorieTextView" />
-
-    <TextView
-        android:id="@+id/targetCalorieDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
-        android:text="0"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/targetCalorieTextView"
-        app:layout_constraintTop_toBottomOf="@+id/currentCalorieDisplay" />
+        app:layout_constraintTop_toBottomOf="@+id/addFoodButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

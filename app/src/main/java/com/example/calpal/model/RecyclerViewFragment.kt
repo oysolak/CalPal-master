@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calpal.R
-import com.example.calpal.databinding.FragmentMealBinding
 import com.example.calpal.databinding.FragmentRecyclerViewBinding
 import com.example.calpal.viewmodel.FoodViewModel
 
@@ -68,6 +66,11 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
         })
 
         recyclerView.adapter = mealAdapter
+
+        binding.statisticsButton.setOnClickListener {
+            StatisticsPopupFragment().show(parentFragmentManager, "PopupFragment")
+        }
+
         val addFoodFragment = AddFoodFragment()
         view.findViewById<Button>(R.id.addFoodButton).setOnClickListener {
             parentFragmentManager.beginTransaction()
@@ -75,9 +78,8 @@ class RecyclerViewFragment : Fragment(R.layout.fragment_recycler_view) {
                 .addToBackStack(null)
                 .commit()
         }
-        foodViewModel.selectedCalories.observe(viewLifecycleOwner) { calories ->
-            binding.currentCalorieDisplay.text = "$calories kcal"
-        }
+
     }
 }
+
 
